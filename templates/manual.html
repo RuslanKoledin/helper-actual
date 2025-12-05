@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ manual_title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #007b7e;
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .instruction-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 35px;
+            border: 2px solid #e3f2fd;
+            border-radius: 16px;
+            padding: 25px;
+            background-color: #f0f8ff;
+            transition: all 0.3s ease;
+        }
+
+        .instruction-step:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+        }
+
+        .instruction-step p {
+            color: #333;
+            font-weight: 500;
+            font-size: 17px;
+            text-align: center;
+            margin: 0 0 20px 0;
+            padding: 0 10px;
+            line-height: 1.6;
+        }
+
+        .instruction-step img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .instruction-step iframe {
+            max-width: 100%;
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: none;
+        }
+
+        .video-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .buttons-container {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e3f2fd;
+        }
+
+        .buttons-container p {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .buttons-container button {
+            padding: 15px 30px;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .solved-button {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+        }
+
+        .solved-button:hover {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .ticket-button {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .ticket-button:hover {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .buttons-container button:active {
+            transform: translateY(0);
+        }
+
+        .no-manual-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+            margin-top: 50px;
+        }
+
+        .back-link {
+            position: fixed;
+            left: 20px;
+            z-index: 1000;
+            font-size: 16px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            background: rgba(0, 123, 126, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(0, 123, 126, 0.95);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            text-decoration: none;
+        }
+
+        .back-link:first-of-type {
+            top: 20px;
+        }
+
+        .second-link {
+            top: 20px;
+            left: 150px;
+        }
+    </style>
+</head>
+<body>
+<a href="javascript:history.back()" class="back-link">
+    ⬅️ Назад
+</a>
+<a href="{{ url_for('index') }}" class="back-link second-link">
+        👤 Страница Входа
+    </a>
+    <div class="container">
+        <h1>{{ manual_title | e }}</h1>
+
+        {% if video_data %}
+            <div class="instruction-step" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);">
+                <span class="video-badge">📹 ВИДЕО-ИНСТРУКЦИЯ</span>
+                <p><strong>{{ video_data.caption }}</strong></p>
+                <video controls style="max-width: 100%; border-radius: 12px;">
+                    <source src="{{ video_data.url }}" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+
+            <!-- Опрос после видео -->
+            <div class="video-feedback-container" style="text-align: center; margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 16px; border: 2px solid #dee2e6;">
+                <p style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #333;">Видео-инструкция помогла решить проблему?</p>
+                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <button onclick="location.href='{{ url_for('video_feedback', result='helped') }}'"
+                            style="padding: 12px 30px; font-size: 16px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);">
+                        Да, помогло ✅
+                    </button>
+                    <button onclick="location.href='{{ url_for('video_feedback', result='not_helped') }}'"
+                            style="padding: 12px 30px; font-size: 16px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);">
+                        Нет, не помогло ❌
+                    </button>
+                </div>
+                <p style="color: #888; font-size: 14px; margin-top: 15px;">Если видео не помогло, вам будет показана пошаговая инструкция</p>
+            </div>
+        {% endif %}
+
+        {# Если есть видео и пользователь еще не ответил на опрос - не показываем пошаговую инструкцию #}
+        {% if not video_data or skip_video_feedback %}
+            {% if photo_urls_with_captions %}
+                {% for photo in photo_urls_with_captions %}
+                    <div class="instruction-step">
+                        <p>{{ photo.caption }}</p>
+                        {% if photo.url %}
+                            <img src="{{ photo.url }}" alt="Инструкция">
+                        {% else %}
+                            <div style="color: #856404; margin: 10px 0; padding: 15px; background: #fff3cd; border-radius: 6px; text-align: center;">
+                                📷 Пока фото для данного шага нет
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% if not video_data %}
+                    <p class="no-manual-message">Для данной проблемы инструкция с фотографиями отсутствует.</p>
+                {% endif %}
+            {% endif %}
+
+            <div class="buttons-container">
+                <p>Я решил вашу проблему?</p>
+                <button class="solved-button" onclick="location.href='{{ url_for('finish_solved') }}'">Да, решил</button>
+                <form action="{{ url_for('send_final_ticket') }}" method="GET" style="display: inline;">
+                    <button class="ticket-button" type="submit">Нет, не решил</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+

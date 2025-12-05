@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка видео</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #6f42c1;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 15px;
+            background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background: linear-gradient(135deg, #5a32a3 0%, #4a2885 100%);
+            transform: translateY(-2px);
+        }
+
+        .file-name {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+            margin-top: 15px;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .info-box {
+            background: #f3e5f5;
+            border-left: 4px solid #6f42c1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loader.active {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #6f42c1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 Загрузка видео-мануала</h1>
+
+        <div class="info-box">
+            📌 Загрузите видео-мануал. Файл будет отправлен в Telegram и вы получите file_id для использования в мануале.<br>
+            ⚠️ Максимальный размер видео: 50 МБ
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('admin_upload_video') }}" enctype="multipart/form-data" id="uploadForm">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="manual_id" value="{{ manual_id }}">
+            <input type="hidden" name="subproblem_id" value="{{ subproblem_id }}">
+
+            <div class="form-group">
+                <label>Выберите видео:</label>
+                <div class="file-upload">
+                    <input type="file" name="video" id="videoFile" accept="video/*" required onchange="displayFileName()">
+                    <label for="videoFile" class="file-upload-label">
+                        Выбрать видео файл
+                    </label>
+                </div>
+                <div class="file-name" id="fileName">Файл не выбран</div>
+            </div>
+
+            <div class="form-group">
+                <label for="caption">Описание видео (опционально):</label>
+                <textarea name="caption" id="caption" placeholder="Введите описание видео..." maxlength="300"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Загрузить</button>
+            <a href="{{ url_for('admin_edit_manual', manual_id=manual_id) }}" class="btn btn-secondary">Отмена</a>
+        </form>
+
+        <div class="loader" id="loader">
+            <p>Загрузка... Пожалуйста, подождите.</p>
+        </div>
+    </div>
+
+    <script>
+        function displayFileName() {
+            const input = document.getElementById('videoFile');
+            const fileNameDiv = document.getElementById('fileName');
+            if (input.files.length > 0) {
+                const file = input.files[0];
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                fileNameDiv.textContent = `${file.name} (${sizeMB} МБ)`;
+
+                // Проверка размера
+                if (file.size > 50 * 1024 * 1024) {
+                    alert('Файл слишком большой! Максимум 50 МБ');
+                    input.value = '';
+                    fileNameDiv.textContent = 'Файл не выбран';
+                }
+            } else {
+                fileNameDiv.textContent = 'Файл не выбран';
+            }
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', function() {
+            document.getElementById('loader').classList.add('active');
+        });
+    </script>
+</body>
+</html>

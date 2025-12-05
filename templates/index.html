@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Помощник техподдержки</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #007b7e;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #007b7e;
+            font-size: 15px;
+        }
+
+        .text-input, .select-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .text-input:focus, .select-input:focus {
+            outline: none;
+            border-color: #007b7e;
+            box-shadow: 0 0 0 3px rgba(0, 123, 126, 0.1);
+            background-color: #ffffff;
+        }
+
+        .select-input {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23007b7e' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .admin-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-size: 14px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            background: rgba(255, 165, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border: 2px solid rgba(255, 165, 0, 0.5);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .admin-link:hover {
+            background: rgba(255, 165, 0, 0.5);
+            border-color: rgba(255, 165, 0, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('admin_login') }}" class="admin-link">
+        🔧 Админ
+    </a>
+    <div class="form-container">
+
+    <h1>Добро пожаловать🫡</h1>
+    <form id="userForm" action="{{ url_for('submit_user_info') }}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group">
+            <label for="department">Отдел:</label>
+            <select id="department" name="department" class="select-input" required>
+                <option value="" disabled selected>Выберите отдел</option>
+                {% for department in departments %}
+                    <option value="{{ department }}">{{ department }}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" class="text-input" placeholder="Руслан" maxlength="20" pattern="[A-Za-zА-Яа-яЁё\s]{1,20}" required title="Только буквы, максимум 20 символов">
+            </div>
+            <div class="form-group">
+                <label for="workplace">Рабочее место:</label>
+                <input type="text" id="workplace" name="workplace" class="text-input" placeholder="52" maxlength="4" pattern="\d{1,4}" required title="Только цифры, максимум 4">
+            </div>
+            <button type="submit">Далее</button>
+        </form>
+    </div>
+
+    <script>
+        // Запрет ввода текста в поле select (только выбор из списка)
+        const departmentSelect = document.getElementById('department');
+        departmentSelect.addEventListener('keydown', function(e) {
+            e.preventDefault(); // блокируем ввод с клавиатуры
+        });
+
+        // Автоматическая проверка формы перед отправкой
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            if (!this.checkValidity()) {
+                e.preventDefault();
+                alert('Пожалуйста, заполните форму корректно!');
+            }
+        });
+    </script>
+</body>
+</html>

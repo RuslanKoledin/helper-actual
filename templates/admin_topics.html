@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Управление тематиками</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        h1 {
+            color: #007b7e;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #007b7e;
+            font-size: 20px;
+            margin-bottom: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #0bb17c;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #007b7e;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #0bb17c;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .example-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .example-text {
+            font-size: 13px;
+            color: #856404;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏷️ Управление тематиками</h1>
+            <div style="display: flex; gap: 10px;">
+                <a href="{{ url_for('admin_stats_dashboard') }}" class="btn btn-primary">📊 Статистика</a>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Назад к мануалам</a>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {% if 'Ошибка' in message or 'ошибка' in message %}alert-danger{% else %}alert-success{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Статистика -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.total_topics }}</div>
+                <div class="stat-label">Всего тематик</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.unique_channels }}</div>
+                <div class="stat-label">Каналов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.cache_entries }}</div>
+                <div class="stat-label">Кэш записей</div>
+            </div>
+        </div>
+
+        <!-- Форма добавления тематики -->
+        <h2>➕ Добавить новую тематику</h2>
+        <div class="form-section">
+            <form method="POST" action="{{ url_for('admin_add_topic') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="form-group">
+                    <label for="channel">Канал обращения *</label>
+                    <select id="channel" name="channel" required>
+                        <option value="">Выберите канал...</option>
+                        {% for ch in channels %}
+                            <option value="{{ ch }}">{{ ch }}</option>
+                        {% endfor %}
+                        <option value="__custom__">Другой канал (введите ниже)</option>
+                    </select>
+                    <input type="text" id="custom_channel" name="custom_channel"
+                           placeholder="Введите название нового канала"
+                           style="margin-top: 10px; display: none;">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sr1">SR1 (Уровень 1)</label>
+                        <input type="text" id="sr1" name="sr1" maxlength="200"
+                               placeholder="Например: Bishkek Petroleum">
+                    </div>
+                    <div class="form-group">
+                        <label for="sr2">SR2 (Уровень 2)</label>
+                        <input type="text" id="sr2" name="sr2" maxlength="200"
+                               placeholder="Например: Платежи">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sr3">SR3 (Уровень 3)</label>
+                        <input type="text" id="sr3" name="sr3" maxlength="200"
+                               placeholder="Например: Списание со счета">
+                    </div>
+                    <div class="form-group">
+                        <label for="sr4">SR4 (Уровень 4)</label>
+                        <input type="text" id="sr4" name="sr4" maxlength="200"
+                               placeholder="Например: Неуспешная оплата">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="full_topic">Полная тематика (опционально)</label>
+                    <input type="text" id="full_topic" name="full_topic" maxlength="500"
+                           placeholder="Если не заполнено, будет сгенерировано из SR1-SR4">
+                    <div class="help-text">
+                        Если не указано, будет автоматически сформировано: SR1/SR2/SR3/SR4
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">📝 Пример:</div>
+                    <div class="example-text">
+                        Канал: Звонки физ лиц<br>
+                        SR1: Bishkek Petroleum<br>
+                        SR2: Платежи<br>
+                        SR3: Списание со счета<br>
+                        SR4: Неуспешная оплата<br>
+                        Полная тематика: Bishkek Petroleum/Платежи/Списание со счета/Неуспешная оплата
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%;">
+                    Добавить тематику
+                </button>
+            </form>
+        </div>
+
+        <!-- Ссылка на просмотр всех тематик -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('admin_list_topics') }}" class="btn btn-secondary">
+                📋 Просмотреть все тематики
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Обработка выбора канала
+        const channelSelect = document.getElementById('channel');
+        const customChannelInput = document.getElementById('custom_channel');
+
+        channelSelect.addEventListener('change', function() {
+            if (this.value === '__custom__') {
+                customChannelInput.style.display = 'block';
+                customChannelInput.required = true;
+            } else {
+                customChannelInput.style.display = 'none';
+                customChannelInput.required = false;
+                customChannelInput.value = '';
+            }
+        });
+
+        // Перед отправкой формы, если выбран custom channel
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (channelSelect.value === '__custom__' && customChannelInput.value.trim()) {
+                // Подменяем значение channel на custom_channel
+                channelSelect.value = customChannelInput.value.trim();
+            }
+        });
+    </script>
+</body>
+</html>

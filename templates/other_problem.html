@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Опишите проблему</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #007b7e;
+            margin-bottom: 25px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            transition: all 0.3s ease;
+            min-height: 120px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #007b7e;
+            box-shadow: 0 0 0 3px rgba(0, 123, 126, 0.1);
+        }
+
+        .file-input-wrapper {
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .file-input-label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #007b7e;
+            font-size: 16px;
+        }
+
+        .screenshot-slots {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .screenshot-slot {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #007bff;
+            border-radius: 12px;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-slot:hover {
+            background-color: #e3f2fd;
+            border-color: #0056b3;
+        }
+
+        .screenshot-slot.drag-over {
+            background-color: #d4edda;
+            border-color: #28a745;
+            border-style: solid;
+        }
+
+        .screenshot-slot.has-image {
+            border-style: solid;
+            border-color: #28a745;
+        }
+
+        .screenshot-slot input[type="file"] {
+            display: none;
+        }
+
+        .screenshot-slot .placeholder {
+            text-align: center;
+            color: #666;
+            pointer-events: none;
+        }
+
+        .screenshot-slot .placeholder-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .screenshot-slot .placeholder-text {
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .screenshot-slot .preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .screenshot-slot.has-image .preview-image {
+            display: block;
+        }
+
+        .screenshot-slot.has-image .placeholder {
+            display: none;
+        }
+
+        .screenshot-slot .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .screenshot-slot .remove-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .screenshot-slot.has-image .remove-btn {
+            display: flex;
+        }
+
+        .file-note {
+            font-size: 13px;
+            color: #666;
+            margin-top: 15px;
+            font-style: italic;
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 16px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+<a href="javascript:history.back()" class="back-link">
+    ⬅️ Назад
+</a>
+    <div class="container">
+        <h2>Пожалуйста, опишите вашу проблему как можно подробнее.</h2>
+        <form action="{{ url_for('other_problem') }}" method="POST" enctype="multipart/form-data">
+         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+         <textarea name="problem" id="problem" rows="10" placeholder="Опишите вашу проблему..." required></textarea>
+
+         <div class="file-input-wrapper">
+             <label class="file-input-label">Прикрепите скриншоты (необязательно, максимум 3):</label>
+             <div class="screenshot-slots">
+                 <div class="screenshot-slot" data-slot="1" tabindex="0">
+                     <input type="file" name="screenshot1" accept="image/*">
+                     <div class="placeholder">
+                         <div class="placeholder-icon">📷</div>
+                         <div class="placeholder-text">Нажмите или<br>Ctrl+V</div>
+                     </div>
+                     <img class="preview-image" alt="Preview">
+                     <button type="button" class="remove-btn" title="Удалить">✕</button>
+                 </div>
+                 <div class="screenshot-slot" data-slot="2" tabindex="0">
+                     <input type="file" name="screenshot2" accept="image/*">
+                     <div class="placeholder">
+                         <div class="placeholder-icon">📷</div>
+                         <div class="placeholder-text">Нажмите или<br>Ctrl+V</div>
+                     </div>
+                     <img class="preview-image" alt="Preview">
+                     <button type="button" class="remove-btn" title="Удалить">✕</button>
+                 </div>
+                 <div class="screenshot-slot" data-slot="3" tabindex="0">
+                     <input type="file" name="screenshot3" accept="image/*">
+                     <div class="placeholder">
+                         <div class="placeholder-icon">📷</div>
+                         <div class="placeholder-text">Нажмите или<br>Ctrl+V</div>
+                     </div>
+                     <img class="preview-image" alt="Preview">
+                     <button type="button" class="remove-btn" title="Удалить">✕</button>
+                 </div>
+             </div>
+             <p class="file-note">Нажмите на область, выберите файл или вставьте из буфера (Ctrl+V)<br>Форматы: JPG, PNG, GIF (максимум 10 МБ)</p>
+         </div>
+
+      <button type="submit">Отправить заявку</button>
+    </form>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slots = document.querySelectorAll('.screenshot-slot');
+    let activeSlot = null;
+
+    slots.forEach(slot => {
+        const input = slot.querySelector('input[type="file"]');
+        const preview = slot.querySelector('.preview-image');
+        const removeBtn = slot.querySelector('.remove-btn');
+
+        // Клик по слоту - открыть выбор файла
+        slot.addEventListener('click', function(e) {
+            if (e.target !== removeBtn && !removeBtn.contains(e.target)) {
+                input.click();
+            }
+        });
+
+        // Фокус для Ctrl+V
+        slot.addEventListener('focus', function() {
+            activeSlot = slot;
+            slot.style.boxShadow = '0 0 0 3px rgba(0, 123, 255, 0.3)';
+        });
+
+        slot.addEventListener('blur', function() {
+            slot.style.boxShadow = '';
+        });
+
+        // Выбор файла
+        input.addEventListener('change', function() {
+            if (input.files && input.files[0]) {
+                handleFile(input.files[0], slot, preview, input);
+            }
+        });
+
+        // Кнопка удаления
+        removeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            clearSlot(slot, preview, input);
+        });
+
+        // Drag & Drop
+        slot.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            slot.classList.add('drag-over');
+        });
+
+        slot.addEventListener('dragleave', function() {
+            slot.classList.remove('drag-over');
+        });
+
+        slot.addEventListener('drop', function(e) {
+            e.preventDefault();
+            slot.classList.remove('drag-over');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                handleFile(e.dataTransfer.files[0], slot, preview, input);
+            }
+        });
+    });
+
+    // Ctrl+V вставка
+    document.addEventListener('paste', function(e) {
+        const items = e.clipboardData.items;
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+                const file = items[i].getAsFile();
+                // Найти первый пустой слот или активный
+                let targetSlot = activeSlot;
+                if (!targetSlot || targetSlot.classList.contains('has-image')) {
+                    for (let slot of slots) {
+                        if (!slot.classList.contains('has-image')) {
+                            targetSlot = slot;
+                            break;
+                        }
+                    }
+                }
+                if (targetSlot && !targetSlot.classList.contains('has-image')) {
+                    const input = targetSlot.querySelector('input[type="file"]');
+                    const preview = targetSlot.querySelector('.preview-image');
+                    handleFile(file, targetSlot, preview, input);
+                }
+                break;
+            }
+        }
+    });
+
+    function handleFile(file, slot, preview, input) {
+        if (!file.type.startsWith('image/')) {
+            alert('Пожалуйста, выберите изображение');
+            return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+            alert('Файл слишком большой. Максимум 10 МБ');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            slot.classList.add('has-image');
+        };
+        reader.readAsDataURL(file);
+
+        // Создаем новый DataTransfer для установки файла в input
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        input.files = dataTransfer.files;
+    }
+
+    function clearSlot(slot, preview, input) {
+        slot.classList.remove('has-image');
+        preview.src = '';
+        input.value = '';
+    }
+});
+</script>
+</body>
+</html>

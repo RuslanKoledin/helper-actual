@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование мануала - {{ manual.title | e }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        h1 {
+            color: #007b7e;
+            font-size: 28px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+
+        .subproblem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .subproblem-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #0bb17c;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .subproblem-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(11, 177, 124, 0.2);
+        }
+
+        .subproblem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .subproblem-id {
+            font-size: 18px;
+            font-weight: 700;
+            color: #007b7e;
+        }
+
+        .subproblem-title {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subproblem-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .flash-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .flash-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 {{ manual.title | e }}</h1>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">← Назад к списку</a>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash flash-success">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="subproblem-list">
+            {% for subproblem_id, subproblem in manual.subproblems.items() %}
+                <div class="subproblem-card" onclick="window.location.href='{{ url_for('admin_edit_subproblem', manual_id=manual_id, subproblem_id=subproblem_id) }}'">
+                    <div class="subproblem-header">
+                        <div class="subproblem-id">{{ subproblem_id }}</div>
+                        <a href="{{ url_for('admin_edit_subproblem', manual_id=manual_id, subproblem_id=subproblem_id) }}"
+                           class="btn btn-edit"
+                           onclick="event.stopPropagation()">
+                            Редактировать
+                        </a>
+                    </div>
+                    <div class="subproblem-title">{{ subproblem.title | e }}</div>
+                    <div class="subproblem-stats">
+                        <div class="stat-item">
+                            📷 Шагов: {{ subproblem.photos|length if subproblem.photos else 0 }}
+                        </div>
+                        {% if subproblem.video %}
+                            <div class="stat-item">
+                                🎥 Есть видео
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

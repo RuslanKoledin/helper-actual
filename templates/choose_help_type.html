@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выберите тип помощи</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #007b7e;
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .help-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .help-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 35px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .help-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 123, 126, 0.25);
+            border-color: #007b7e;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+        }
+
+        .help-card:active {
+            transform: translateY(-4px);
+        }
+
+        .help-icon {
+            font-size: 60px;
+            line-height: 1;
+        }
+
+        .help-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #007b7e;
+            margin-bottom: 8px;
+        }
+
+        .help-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .user-info {
+            background: #f0f8ff;
+            border: 2px solid #007b7e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .user-info h3 {
+            color: #007b7e;
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .user-info p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .user-info strong {
+            color: #007b7e;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .help-types {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .help-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👋 Добро пожаловать в Helper!</h1>
+        <p class="subtitle">Выберите, чем мы можем вам помочь сегодня</p>
+
+        <!-- Информация о пользователе -->
+        <div class="user-info">
+            <h3>📋 Ваши данные</h3>
+            <p><strong>Отдел:</strong> {{ user_info.department }}</p>
+            <p><strong>Имя:</strong> {{ user_info.name }}</p>
+            <p><strong>Рабочее место:</strong> {{ user_info.workplace }}</p>
+        </div>
+
+        <!-- Выбор типа помощи -->
+        <div class="help-types">
+            <!-- Технические проблемы -->
+            <a href="{{ url_for('show_problems') }}" class="help-card">
+                <div class="help-icon">🔧</div>
+                <div class="help-title">Технические проблемы</div>
+                <div class="help-description">
+                    Проблемы с Outlook, интерфейсами, памятью и другие технические вопросы
+                </div>
+            </a>
+
+            <!-- Поиск по тематикам -->
+            <a href="{{ url_for('search_topics') }}" class="help-card">
+                <div class="help-icon">📋</div>
+                <div class="help-title">Тематики обращений</div>
+                <div class="help-description">
+                    Найдите подходящую тематику для фиксации обращения клиента
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

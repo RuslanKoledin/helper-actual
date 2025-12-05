@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование мануала</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        h1 {
+            color: #007b7e;
+            font-size: 28px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #0bb17c;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .subproblem-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .subproblem-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #007b7e;
+            margin-bottom: 15px;
+        }
+
+        .photo-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #0bb17c;
+        }
+
+        .photo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .photo-number {
+            font-weight: 600;
+            color: #007b7e;
+        }
+
+        .btn-upload {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            padding: 14px 30px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .photo-id-display {
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .photo-preview {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e9ecef;
+        }
+
+        .photo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+
+        .modal-body {
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .btn-cancel {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+        }
+
+        .photo-item.deleted {
+            opacity: 0.5;
+            border-left-color: #dc3545;
+        }
+
+        .upload-form {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            border: 2px dashed #28a745;
+        }
+
+        .upload-form.active {
+            display: block;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .file-input-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .preview-container {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .preview-container.active {
+            display: block;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .remove-preview {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .video-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #6f42c1;
+        }
+
+        .video-preview {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e9ecef;
+        }
+
+        .video-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✏️ Редактирование мануала</h1>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Назад к списку</a>
+        </div>
+
+        <form method="POST" action="{{ url_for('admin_update_manual', manual_id=manual_id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="form-group">
+                <label for="title">Заголовок мануала:</label>
+                <input type="text" id="title" name="title" value="{{ manual.title | e }}" required maxlength="200">
+            </div>
+
+            {% if manual.subproblems %}
+                {% for subproblem_id, subproblem in manual.subproblems.items() %}
+                    <div class="subproblem-section">
+                        <div class="subproblem-title">{{ subproblem.title | e }}</div>
+
+                        <!-- Секция для добавления нового шага В НАЧАЛО -->
+                        <div class="photo-item" style="border-left-color: #17a2b8; background: #e8f8fb;">
+                            <div class="photo-header">
+                                <span class="photo-number" style="color: #17a2b8;">⬆️ Добавить шаг в начало</span>
+                                <div>
+                                    <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);" onclick="showInsertFirstStepForm('{{ subproblem_id }}')">
+                                        Добавить
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upload-form" id="insert-first-step-form-{{ subproblem_id }}" style="border-color: #17a2b8; background: #e8f8fb;">
+                                <div class="form-group">
+                                    <label style="color: #17a2b8;">⬆️ Новый первый шаг:</label>
+                                    <textarea id="insert-first-step-caption-{{ subproblem_id }}" placeholder="Введите описание нового первого шага..." maxlength="300"></textarea>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); flex: 1;" onclick="submitInsertFirstStep('{{ manual_id }}', '{{ subproblem_id }}')">
+                                        Сохранить
+                                    </button>
+                                    <button type="button" class="btn btn-delete" style="flex: 1;" onclick="hideInsertFirstStepForm('{{ subproblem_id }}')">
+                                        Отмена
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if subproblem.photos and subproblem.photos|length > 0 %}
+                            {% for photo in subproblem.photos %}
+                                <div class="photo-item" id="photo-{{ subproblem_id }}-{{ loop.index0 }}" {% if not photo.id %}style="border-left-color: #ffc107;"{% endif %}>
+                                    <div class="photo-header">
+                                        <span class="photo-number">Шаг {{ loop.index }}</span>
+                                        <div>
+                                            <button type="button" class="btn btn-upload" onclick="uploadNewPhoto('{{ manual_id }}', '{{ subproblem_id }}', {{ loop.index0 }})">
+                                                Загрузить новое
+                                            </button>
+                                            {% if photo.id %}
+                                            <button type="button" class="btn btn-delete" onclick="confirmDelete('{{ subproblem_id }}', {{ loop.index0 }}, {{ loop.index }})">
+                                                Удалить
+                                            </button>
+                                            {% endif %}
+                                            <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);" onclick="showInsertStepForm('{{ subproblem_id }}', {{ loop.index0 }})">
+                                                ➕ Добавить шаг после
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="photo-content">
+                                        {% if photo.id %}
+                                            {% if photo_urls and subproblem_id in photo_urls and loop.index0 < photo_urls[subproblem_id]|length %}
+                                                {% if photo_urls[subproblem_id][loop.index0] %}
+                                                    <img src="{{ photo_urls[subproblem_id][loop.index0] }}" alt="Фото {{ loop.index }}" class="photo-preview">
+                                                {% endif %}
+                                            {% endif %}
+                                        {% else %}
+                                            <div style="color: #856404; margin: 10px 0; padding: 15px; background: #fff3cd; border-radius: 6px; text-align: center;">
+                                                📷 Пока фото для данного шага нет<br>
+                                                <small>Нажмите "Загрузить новое" чтобы добавить фото</small>
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="form-group">
+                                            <label>Описание шага:</label>
+                                            <textarea name="caption_{{ subproblem_id }}_{{ loop.index0 }}" maxlength="300">{{ photo.caption | e }}</textarea>
+                                        </div>
+
+                                        {% if photo.id %}
+                                        <div class="photo-id-display">
+                                            ID: {{ photo.id | e }}
+                                        </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="upload-form" id="upload-form-{{ subproblem_id }}-{{ loop.index0 }}">
+                                        <div class="file-input-wrapper">
+                                            <label for="file-{{ subproblem_id }}-{{ loop.index0 }}" class="file-input-label">
+                                                📷 Выбрать новое фото
+                                            </label>
+                                            <input type="file" id="file-{{ subproblem_id }}-{{ loop.index0 }}" accept="image/*" onchange="previewFile('{{ subproblem_id }}', {{ loop.index0 }})">
+                                        </div>
+
+                                        <div class="preview-container" id="preview-{{ subproblem_id }}-{{ loop.index0 }}">
+                                            <img class="preview-image" id="preview-img-{{ subproblem_id }}-{{ loop.index0 }}" alt="Preview">
+                                            <button type="button" class="remove-preview" onclick="removePreview('{{ subproblem_id }}', {{ loop.index0 }})">
+                                                ✕ Отменить
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Форма для вставки нового шага после этого -->
+                                    <div class="upload-form" id="insert-step-form-{{ subproblem_id }}-{{ loop.index0 }}" style="border-color: #17a2b8; background: #e8f8fb;">
+                                        <div class="form-group">
+                                            <label style="color: #17a2b8;">➕ Новый шаг после "Шаг {{ loop.index }}":</label>
+                                            <textarea id="insert-step-caption-{{ subproblem_id }}-{{ loop.index0 }}" placeholder="Введите описание нового шага..." maxlength="300"></textarea>
+                                        </div>
+                                        <div style="display: flex; gap: 10px;">
+                                            <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); flex: 1;" onclick="submitInsertStep('{{ manual_id }}', '{{ subproblem_id }}', {{ loop.index0 }})">
+                                                Сохранить
+                                            </button>
+                                            <button type="button" class="btn btn-delete" style="flex: 1;" onclick="hideInsertStepForm('{{ subproblem_id }}', {{ loop.index0 }})">
+                                                Отмена
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="photo-item" style="border-left-color: #ffc107;">
+                                <p style="color: #856404; margin: 0; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                                    📷 Пока фотографии под данный шаг нет
+                                </p>
+                            </div>
+                        {% endif %}
+
+                        <!-- Секция для видео -->
+                        {% if subproblem.video %}
+                            <div class="video-item">
+                                <div class="photo-header">
+                                    <span class="photo-number" style="color: #6f42c1;">🎥 Видео-мануал</span>
+                                    <div>
+                                        <button type="button" class="btn btn-delete" onclick="confirmDeleteVideo('{{ subproblem_id }}')">
+                                            Удалить
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="video-content">
+                                    {% if video_urls and subproblem_id in video_urls and video_urls[subproblem_id] %}
+                                        <video class="video-preview" controls>
+                                            <source src="{{ video_urls[subproblem_id] }}" type="video/mp4">
+                                            Ваш браузер не поддерживает видео.
+                                        </video>
+                                    {% endif %}
+
+                                    <div class="form-group">
+                                        <label>Описание видео:</label>
+                                        <textarea name="video_caption_{{ subproblem_id }}" maxlength="300">{{ subproblem.video.caption | e }}</textarea>
+                                    </div>
+
+                                    <div class="photo-id-display">
+                                        ID: {{ subproblem.video.id | e }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="video-item" style="border-left-color: #ffc107;">
+                                <div class="photo-header">
+                                    <span class="photo-number" style="color: #856404;">🎥 Пока видео-мануала нет</span>
+                                    <div>
+                                        <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%);" onclick="uploadNewVideo('{{ manual_id }}', '{{ subproblem_id }}')">
+                                            Загрузить видео
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- Секция для добавления нового шага -->
+                        <div class="photo-item" style="border-left-color: #28a745; background: #f0fff4;">
+                            <div class="photo-header">
+                                <span class="photo-number" style="color: #28a745;">➕ Добавить новый шаг</span>
+                                <div>
+                                    <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #28a745 0%, #218838 100%);" onclick="showNewStepForm('{{ subproblem_id }}')">
+                                        Добавить
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="upload-form" id="new-step-form-{{ subproblem_id }}" style="border-color: #28a745;">
+                                <div class="form-group">
+                                    <label>Описание нового шага:</label>
+                                    <textarea id="new-step-caption-{{ subproblem_id }}" placeholder="Введите описание шага..." maxlength="300"></textarea>
+                                </div>
+                                <div style="display: flex; gap: 10px;">
+                                    <button type="button" class="btn btn-upload" style="background: linear-gradient(135deg, #28a745 0%, #218838 100%); flex: 1;" onclick="submitNewStep('{{ manual_id }}', '{{ subproblem_id }}')">
+                                        Сохранить
+                                    </button>
+                                    <button type="button" class="btn btn-delete" style="flex: 1;" onclick="hideNewStepForm('{{ subproblem_id }}')">
+                                        Отмена
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="btn btn-save">Сохранить изменения</button>
+        </form>
+    </div>
+
+    <!-- Modal подтверждения удаления фото -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">⚠️ Подтверждение удаления</div>
+            <div class="modal-body">
+                Вы действительно хотите удалить фото <strong id="photoNumber"></strong>?<br>
+                После подтверждения появится форма для загрузки нового файла.
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-cancel" onclick="closeDeleteModal()">Нет</button>
+                <button class="btn btn-confirm" onclick="deletePhoto()">Да, удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal подтверждения удаления видео -->
+    <div id="deleteVideoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">⚠️ Подтверждение удаления видео</div>
+            <div class="modal-body">
+                Вы действительно хотите удалить видео-мануал?<br>
+                Это действие нельзя будет отменить.
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-cancel" onclick="closeDeleteVideoModal()">Нет</button>
+                <button class="btn btn-confirm" onclick="deleteVideo()">Да, удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDeleteTarget = null;
+        let currentDeleteVideoTarget = null;
+
+        function uploadNewPhoto(manualId, subproblemId, photoIndex) {
+            const url = `/admin/upload-photo?manual_id=${manualId}&subproblem_id=${subproblemId}&photo_index=${photoIndex}`;
+            window.location.href = url;
+        }
+
+        function confirmDelete(subproblemId, photoIndex, photoNumber) {
+            currentDeleteTarget = { subproblemId, photoIndex };
+            document.getElementById('photoNumber').textContent = photoNumber;
+            document.getElementById('deleteModal').style.display = 'block';
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+            currentDeleteTarget = null;
+        }
+
+        function deletePhoto() {
+            if (!currentDeleteTarget) return;
+
+            const { subproblemId, photoIndex } = currentDeleteTarget;
+
+            // Отправляем POST запрос на удаление
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/delete-photo';
+
+            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+            const manualId = '{{ manual_id }}';
+
+            form.innerHTML = `
+                <input type="hidden" name="csrf_token" value="${csrfToken}">
+                <input type="hidden" name="manual_id" value="${manualId}">
+                <input type="hidden" name="subproblem_id" value="${subproblemId}">
+                <input type="hidden" name="photo_index" value="${photoIndex}">
+            `;
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function previewFile(subproblemId, photoIndex) {
+            const fileInput = document.getElementById(`file-${subproblemId}-${photoIndex}`);
+            const previewContainer = document.getElementById(`preview-${subproblemId}-${photoIndex}`);
+            const previewImg = document.getElementById(`preview-img-${subproblemId}-${photoIndex}`);
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+
+                // Проверка типа файла
+                if (!file.type.startsWith('image/')) {
+                    alert('Пожалуйста, выберите изображение');
+                    fileInput.value = '';
+                    return;
+                }
+
+                // Проверка размера (макс 10MB)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('Файл слишком большой. Максимум 10 МБ');
+                    fileInput.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewContainer.classList.add('active');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removePreview(subproblemId, photoIndex) {
+            const fileInput = document.getElementById(`file-${subproblemId}-${photoIndex}`);
+            const previewContainer = document.getElementById(`preview-${subproblemId}-${photoIndex}`);
+            const previewImg = document.getElementById(`preview-img-${subproblemId}-${photoIndex}`);
+
+            fileInput.value = '';
+            previewImg.src = '';
+            previewContainer.classList.remove('active');
+        }
+
+        // Функции для видео
+        function confirmDeleteVideo(subproblemId) {
+            currentDeleteVideoTarget = subproblemId;
+            document.getElementById('deleteVideoModal').style.display = 'block';
+        }
+
+        function closeDeleteVideoModal() {
+            document.getElementById('deleteVideoModal').style.display = 'none';
+            currentDeleteVideoTarget = null;
+        }
+
+        function deleteVideo() {
+            if (!currentDeleteVideoTarget) return;
+
+            const subproblemId = currentDeleteVideoTarget;
+
+            // Отправляем POST запрос на удаление
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/delete-video';
+
+            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+            const manualId = '{{ manual_id }}';
+
+            form.innerHTML = `
+                <input type="hidden" name="csrf_token" value="${csrfToken}">
+                <input type="hidden" name="manual_id" value="${manualId}">
+                <input type="hidden" name="subproblem_id" value="${subproblemId}">
+            `;
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Функция для загрузки видео
+        function uploadNewVideo(manualId, subproblemId) {
+            const url = `/admin/upload-video?manual_id=${manualId}&subproblem_id=${subproblemId}`;
+            window.location.href = url;
+        }
+
+        // Функции для добавления нового шага в конец
+        function showNewStepForm(subproblemId) {
+            const form = document.getElementById(`new-step-form-${subproblemId}`);
+            form.classList.add('active');
+        }
+
+        function hideNewStepForm(subproblemId) {
+            const form = document.getElementById(`new-step-form-${subproblemId}`);
+            const textarea = document.getElementById(`new-step-caption-${subproblemId}`);
+            form.classList.remove('active');
+            textarea.value = '';
+        }
+
+        function submitNewStep(manualId, subproblemId) {
+            const textarea = document.getElementById(`new-step-caption-${subproblemId}`);
+            const caption = textarea.value.trim();
+
+            if (!caption) {
+                alert('Пожалуйста, введите описание шага');
+                return;
+            }
+
+            // Создаем и отправляем форму
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/add-new-step';
+
+            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+            form.innerHTML = `
+                <input type="hidden" name="csrf_token" value="${csrfToken}">
+                <input type="hidden" name="manual_id" value="${manualId}">
+                <input type="hidden" name="subproblem_id" value="${subproblemId}">
+                <input type="hidden" name="caption" value="${caption}">
+                <input type="hidden" name="after_index" value="-1">
+            `;
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Функции для вставки шага после существующего
+        function showInsertStepForm(subproblemId, afterIndex) {
+            const form = document.getElementById(`insert-step-form-${subproblemId}-${afterIndex}`);
+            form.classList.add('active');
+        }
+
+        function hideInsertStepForm(subproblemId, afterIndex) {
+            const form = document.getElementById(`insert-step-form-${subproblemId}-${afterIndex}`);
+            const textarea = document.getElementById(`insert-step-caption-${subproblemId}-${afterIndex}`);
+            form.classList.remove('active');
+            textarea.value = '';
+        }
+
+        function submitInsertStep(manualId, subproblemId, afterIndex) {
+            const textarea = document.getElementById(`insert-step-caption-${subproblemId}-${afterIndex}`);
+            const caption = textarea.value.trim();
+
+            if (!caption) {
+                alert('Пожалуйста, введите описание шага');
+                return;
+            }
+
+            // Создаем и отправляем форму
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/add-new-step';
+
+            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+            form.innerHTML = `
+                <input type="hidden" name="csrf_token" value="${csrfToken}">
+                <input type="hidden" name="manual_id" value="${manualId}">
+                <input type="hidden" name="subproblem_id" value="${subproblemId}">
+                <input type="hidden" name="caption" value="${caption}">
+                <input type="hidden" name="after_index" value="${afterIndex}">
+            `;
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Функции для вставки шага В НАЧАЛО (перед первым шагом)
+        function showInsertFirstStepForm(subproblemId) {
+            const form = document.getElementById(`insert-first-step-form-${subproblemId}`);
+            form.classList.add('active');
+        }
+
+        function hideInsertFirstStepForm(subproblemId) {
+            const form = document.getElementById(`insert-first-step-form-${subproblemId}`);
+            const textarea = document.getElementById(`insert-first-step-caption-${subproblemId}`);
+            form.classList.remove('active');
+            textarea.value = '';
+        }
+
+        function submitInsertFirstStep(manualId, subproblemId) {
+            const textarea = document.getElementById(`insert-first-step-caption-${subproblemId}`);
+            const caption = textarea.value.trim();
+
+            if (!caption) {
+                alert('Пожалуйста, введите описание шага');
+                return;
+            }
+
+            // Создаем и отправляем форму
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/add-new-step';
+
+            const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+            form.innerHTML = `
+                <input type="hidden" name="csrf_token" value="${csrfToken}">
+                <input type="hidden" name="manual_id" value="${manualId}">
+                <input type="hidden" name="subproblem_id" value="${subproblemId}">
+                <input type="hidden" name="caption" value="${caption}">
+                <input type="hidden" name="after_index" value="-2">
+            `;
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Закрытие модального окна по клику вне его
+        window.onclick = function(event) {
+            const modal = document.getElementById('deleteModal');
+            const videoModal = document.getElementById('deleteVideoModal');
+            if (event.target === modal) {
+                closeDeleteModal();
+            }
+            if (event.target === videoModal) {
+                closeDeleteVideoModal();
+            }
+        }
+    </script>
+</body>
+</html>

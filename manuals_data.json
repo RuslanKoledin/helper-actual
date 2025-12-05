@@ -1,0 +1,445 @@
+{
+  "manuals": {
+    "1": {
+      "title": "1. Проблемы с почтой",
+      "subproblems": {
+        "1.1": {
+          "title": "Заполнилась память",
+          "video": {
+            "id": "BAACAgIAAxkBAAIKeWkPK-xwmW5aQqkeYOGtHPeNMCS7AALofwACQtR4SP7CmzLxLzl4NgQ",
+            "caption": "Видео-инструкция: Как очистить переполненную память в Outlook"
+          },
+          "photos": [
+            {
+              "id": "AgACAgIAAyEGAAS2wnenAAICpWklfZbrfvcQfPunS8cBUpClLqlZAAKaDWsbGPIpScBSx-oESUUNAQADAgADeAADNgQ",
+              "caption": "1. Открываем Outlook, далее нажимаем «Файл»"
+            },
+            {
+              "id": "AgACAgIAAxkBAAIBmmijBj-QjkWfOtf21yx0V6Y-N1L9AAIT9DEb1IEYScIMwp3aQISBAQADAgADeQADNgQ",
+              "caption": "2. Далее нажимаем на выпадающий список «Инструменты» либо «Средства очистки»."
+            },
+            {
+              "id": null,
+              "caption": "Открываем Outlook, далее нажимаем «Файл»"
+            },
+            {
+              "id": "AgACAgIAAxkBAAIBnGijBlGLcH9BZaBEbm0IpW_1wOk8AAIU9DEb1IEYSYZCt5oi-tJ8AQADAgADeQADNgQ",
+              "caption": "3. Выбираем «Удалять старые элементы» или «Архивировать» (в старой версии «Архивация»)."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIBnmijBnJ6IfiY493QemCLzjP3U_xWAAIV9DEb1IEYSRLuC30nvkKaAQADAgADeAADNgQ",
+              "caption": "4. Далее выполняем следующие действия:\r\n1) Выбираем до какого числа архивировать сообщения;\r\n2) Выбираем, где будет хранится наш архив (желательно на диске D);\r\n3) После того, как сделали, нажимаем на кнопку «ОК»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICumioGss7AurZHYCnFkh0CF3Oy-0vAAL39TEb1phBSaXZZmMPopEmAQADAgADeQADNgQ",
+              "caption": "5. Как проверить, идет ли архивация?\r\nВ главном меню, снизу будет идти загрузка. После завершения архивации перезапустите Outlook."
+            }
+          ]
+        },
+        "1.2": {
+          "title": "Не открывается OutLook",
+          "photos": [
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANmaKQEKBsMSAgk2oPAGaGDcy2kaa8AAooAATIbYCsgSd2SGdGDVHTgAQADAgADeAADNgQ",
+              "caption": "1. Нажимаем на иконку Интернета, после чего на cbk.kg."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANoaKQENvH2iB3MrWQaY8pGVAyKSQIAAosAATIbYCsgSfIndpbMxTVeAQADAgADeAADNgQ",
+              "caption": "2. Далее нажимаем на ползунок и отключаем прокси-сервер."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANqaKQEO4rDdHqoaNkf3MXvZUKvxqAAAowAATIbYCsgSQIeW0GrSafTAQADAgADeAADNgQ",
+              "caption": "3. Нажимаем на “Пуск”, пишем “Панель управления” и нажимаем на него."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANsaKQEQIJi-PZ4IU5SSQ4lzGZK3wUAAo0AATIbYCsgSU-NjkT95V4uAQADAgADeAADNgQ",
+              "caption": "4. Нажимаем на “Категория” и выбираем “Крупные значки”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANuaKQERWcYxPP8K8ANHS7a0d_lPiQAAo4AATIbYCsgSUbhFS-wPERBAQADAgADeAADNgQ",
+              "caption": "5. Нажимаем на “Почта”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANwaKQESlm3yFRyYLdoJ--NIbH3XrEAAo8AATIbYCsgSe2j2yyi_rZjAQADAgADeAADNgQ",
+              "caption": "6. Далее нажимаем на “Показать”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANyaKQET7sIROkVj4i0J20js-6rG7IAApAAATIbYCsgSRpQD9YBHDxSAQADAgADeAADNgQ",
+              "caption": "7. Нажимаем на “Удалить”, тем самым удаляем текущую конфигурацию."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN0aKQEU5xHaBxEvMvx3VmtDWzCTf8AApEAATIbYCsgSbborEbWbiDNAQADAgADeAADNgQ",
+              "caption": "8. Далее нажимаем на “Да”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN2aKQEXTX6I_OoadvrUoz4J83AWS0AApIAATIbYCsgSfB-0N0z-T_MAQADAgADeAADNgQ",
+              "caption": "9. Добавляем новую конфигурацию."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN4aKQEZOqaLIMk-bTtWC6HwLDupeoAApMAATIbYCsgSc8z8b7wvyLbAQADAgADeAADNgQ",
+              "caption": "10. Прописываем в поле “Имя конфигурации”: 123, 11, 1, 2 или 3. Далее нажимаем на “Ок”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN6aKQEaRumCFeRXsF4axyQd6ThpTAAApQAATIbYCsgSbuiO8JLrhISAQADAgADeAADNgQ",
+              "caption": "11. Нажимаем на “Далее”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN8aKQEbfyGBfXiRSK4LMUMO0P7SLkAApUAATIbYCsgSYVMvkbxnIJYAQADAgADeAADNgQ",
+              "caption": "12. После чего нажимаем на “Готово”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAOAaKQEfchBbtFTbmX5IknPZCxC73IAApYAATIbYCsgSUTR08yC3LRUAQADAgADeAADNgQ",
+              "caption": "13. Далее нажимаем сперва на “Применить”, затем на “Ок”."
+            }
+          ],
+          "video": {
+            "id": "BAACAgIAAyEGAAS2wnenAAICq2knvkZLWHvzAAGP3VmKlihAAjr2CQACo3oAAl5EQEnP142j3ZJkhTYE",
+            "caption": "Видео мануал"
+          }
+        },
+        "1.3": {
+          "title": "Письма в Исходящих",
+          "photos": [
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANmaKQEKBsMSAgk2oPAGaGDcy2kaa8AAooAATIbYCsgSd2SGdGDVHTgAQADAgADeAADNgQ",
+              "caption": "1. Нажимаем на иконку Интернета, после чего на cbk.kg."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANoaKQENvH2iB3MrWQaY8pGVAyKSQIAAosAATIbYCsgSfIndpbMxTVeAQADAgADeAADNgQ",
+              "caption": "2. Далее нажимаем на ползунок и отключаем прокси-сервер."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANqaKQEO4rDdHqoaNkf3MXvZUKvxqAAAowAATIbYCsgSQIeW0GrSafTAQADAgADeAADNgQ",
+              "caption": "3. Нажимаем на “Пуск”, пишем “Панель управления” и нажимаем на него."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANsaKQEQIJi-PZ4IU5SSQ4lzGZK3wUAAo0AATIbYCsgSU-NjkT95V4uAQADAgADeAADNgQ",
+              "caption": "4. Нажимаем на “Категория” и выбираем “Крупные значки”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANuaKQERWcYxPP8K8ANHS7a0d_lPiQAAo4AATIbYCsgSUbhFS-wPERBAQADAgADeAADNgQ",
+              "caption": "5. Нажимаем на “Почта”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANwaKQESlm3yFRyYLdoJ--NIbH3XrEAAo8AATIbYCsgSe2j2yyi_rZjAQADAgADeAADNgQ",
+              "caption": "6. Далее нажимаем на “Показать”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AANyaKQET7sIROkVj4i0J20js-6rG7IAApAAATIbYCsgSRpQD9YBHDxSAQADAgADeAADNgQ",
+              "caption": "7. Нажимаем на “Удалить”, тем самым удаляем текущую конфигурацию."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN0aKQEU5xHaBxEvMvx3VmtDWzCTf8AApEAATIbYCsgSbborEbWbiDNAQADAgADeAADNgQ",
+              "caption": "8. Далее нажимаем на “Да”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN2aKQEXTX6I_OoadvrUoz4J83AWS0AApIAATIbYCsgSfB-0N0z-T_MAQADAgADeAADNgQ",
+              "caption": "9. Добавляем новую конфигурацию."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN4aKQEZOqaLIMk-bTtWC6HwLDupeoAApMAATIbYCsgSc8z8b7wvyLbAQADAgADeAADNgQ",
+              "caption": "10. Прописываем в поле “Имя конфигурации”: 123, 11, 1, 2 или 3. Далее нажимаем на “Ок”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN6aKQEaRumCFeRXsF4axyQd6ThpTAAApQAATIbYCsgSbuiO8JLrhISAQADAgADeAADNgQ",
+              "caption": "11. Нажимаем на “Далее”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAN8aKQEbfyGBfXiRSK4LMUMO0P7SLkAApUAATIbYCsgSYVMvkbxnIJYAQADAgADeAADNgQ",
+              "caption": "12. После чего нажимаем на “Готово”."
+            },
+            {
+              "id": "AgACAgIAAyEFAASZzkr9AAOAaKQEfchBbtFTbmX5IknPZCxC73IAApYAATIbYCsgSUTR08yC3LRUAQADAgADeAADNgQ",
+              "caption": "13. Далее нажимаем сперва на “Применить”, затем на “Ок”."
+            }
+          ]
+        }
+      }
+    },
+    "2": {
+      "title": "2. Настройка Тонкий VISA",
+      "version_hints": {
+        "title": "Как определить версию Firefox?",
+        "hints": [
+          {
+            "version": "Новый Firefox",
+            "description": "Современный интерфейс с округлыми углами, меню расположено справа вверху (три горизонтальные полоски), адресная строка объединена с поиском"
+          },
+          {
+            "version": "Старый Firefox",
+            "description": "Классический интерфейс с угловатыми элементами, меню может быть в виде кнопки \"Firefox\" слева вверху или классического меню"
+          }
+        ]
+      },
+      "subproblems": {
+        "2.1": {
+          "title": "Тонкий на новом Firefox",
+          "photos": [
+            {
+              "id": "AgACAgIAAxkBAAICamikD9-IEYk4r7UmIfegE0pnEx_TAAJQ7zEbDRsgSZXIT3m6O--0AQADAgADbQADNgQ",
+              "caption": "1. Открываем браузер «MozillaFirefox»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICbGikD_GS-TK39c3iWotC9PL1v6qIAAJR7zEbDRsgSYpZnUhMDrh0AQADAgADeQADNgQ",
+              "caption": "2. Нажимаем на Меню браузера."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICbmikD_lyVkF0CUZO1pr0gamt2CHcAAJS7zEbDRsgScCPjjvgAQOJAQADAgADeQADNgQ",
+              "caption": "3. Нажимаем «Настройки»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICcGikD_760vS2-hYYnzkpItH-yWN_AAJT7zEbDRsgSYzaH46o3QmhAQADAgADeQADNgQ",
+              "caption": "4. Спускаемся в самый низ и находим кнопку «Параметры» («Settings»)."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICcmikEANdiQVCeL1dRKugGElj2xU1AAJU7zEbDRsgSepyxtVHMHxVAQADAgADeQADNgQ",
+              "caption": "5. Начинаем настройку:\n1) Выбираем пункт «Настройка прокси вручную» («Manual proxy configuration»);\n2) Прописываем в ячейке IP: 172.22.25.11; \n3) Прописываем порт: 4545;\n4) Обязательно ставим галочку в конце (иначе работать не будет);\n5) Нажимаем ОК."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICdGikEAfVWpCR0g0bX_q8UcjZcVl4AAJV7zEbDRsgSUH-JxB_cedVAQADAgADeQADNgQ",
+              "caption": "6. Затем копируем ссылку Тонкого Виза/Тонкого Элкарт и вставляем в адресную строку браузера «MozillaFirefox». Если после этого выйдет следующее окно, нажимаем на «Advanced»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICdmikEBEO4lesGOcJcOzu-Tg7mb3TAAJW7zEbDRsgSeNmnjYBCYlTAQADAgADeQADNgQ",
+              "caption": "7. После этого нажимаем «AddException…»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICeGikEBZBEgk72Bg-U9R2tYJga1sSAAJY7zEbDRsgSdC5cCRr_sOlAQADAgADeQADNgQ",
+              "caption": "8. Далее «Confirm Security Exception»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAICemikEBopyPZCvSwzpeMLB7zDlbS5AAJZ7zEbDRsgSS7n6NsyF3F0AQADAgADeQADNgQ",
+              "caption": "9. При нажатии на предыдущую кнопку откроется сайт «Тонкий VISA». Можете прописать логин и пароль с MWiki."
+            }
+          ]
+        },
+        "2.2": {
+          "title": "Тонкий на старом Firefox",
+          "photos": [
+            {
+              "id": "AgACAgIAAxkBAAIDr2ikTc01o0OuhnpMFUquOEG6bPYLAAKt8DEbDRsgSfW4jWAnpc7gAQADAgADeAADNgQ",
+              "caption": "1. Открываем браузер MozillaFirefox."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDsWikTdLDZn-BLqH64m85w2dv6_haAAKv8DEbDRsgSV33HAQSuZz2AQADAgADeAADNgQ",
+              "caption": "2. Нажимаем на Меню браузера."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDs2ikTdeBTKsgZVCVcvAELOw55GIzAAKw8DEbDRsgSUTw2zcOXKBRAQADAgADeAADNgQ",
+              "caption": "3. Нажимаем “Настройки”."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDtWikTd68yf9Riwe9E83zqXuOO7dpAAKx8DEbDRsgSftXSDU9u9lFAQADAgADeQADNgQ",
+              "caption": "4. Далее “Дополнительные”."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDt2ikTeJuJrNGiIhpRmelwH9HYF9lAAKy8DEbDRsgSZUI8LcK5TeLAQADAgADeQADNgQ",
+              "caption": "5. Затем нажимаем на “Сеть” и “Настроить”."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDuWikTeYq6gZpSdxMhRUQt9KnSMyYAAKz8DEbDRsgSYJknLePpA0WAQADAgADeQADNgQ",
+              "caption": "6. Выбираем “Ручная настройка сервиса прокси”, далее прописываем в HTTP-прокси: 172.22.25.11, в Порт: 4545, после чего ставим галочку в “Использовать этот прокси-сервер для всех протоколов” (как на скрине)."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDu2ikTeyjzpFUMgvepk1voCroA2eFAAK18DEbDRsgSeTIsz4fZ0uHAQADAgADeQADNgQ",
+              "caption": "7. Затем копируем ссылки Тонкого Виза/Тонкого Элкарт и вставляем в адресную строку браузера Мозилла Файрфокс. Если после этого выйдет следующее окно, нажимаем на «Я понимаю риск» и «Добавить исключение…»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDvWikTfFm85wXvZZ061Q8zdVyFgT_AAK48DEbDRsgSZcAASmSzMRTTQEAAwIAA3kAAzYE",
+              "caption": "8. После этого нажимаем «Подтвердить исключение безопасности»."
+            },
+            {
+              "id": "AgACAgIAAxkBAAIDv2ikTfe2FkkGCXMcTp-Xuh6snPDWAAK58DEbDRsgSUMf7jIkausdAQADAgADeAADNgQ",
+              "caption": "9. Далее откроется сайт."
+            }
+          ]
+        }
+      }
+    },
+    "3": {
+      "title": "3. Не работает наушник - звук/микрофон",
+      "subproblems": {
+        "3.1": {
+          "title": "Сброс Cisco Jabber",
+          "photos": [
+            {
+              "id": "AgACAgIAAxkBAAIGD2imlv8I-dvGME-7-577HWplAm4kAAKZ-zEbfsM4SSn18TNkcqZeAQADAgADbQADNgQ",
+              "caption": "Сначала заходим в Cisco Jabber, вводим логин и пароль от своей учетной записи и смотрим на значок монитора в окошке приложения."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICgWilWFzua_IzRj9HJxM5A2toqybiAAP6MRtfKylJPrSrHBlXX44BAAMCAANtAAM2BA",
+              "caption": "Если значок монитора красный, то нужно совершить сброс Jabbera по следующей инструкции:"
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICg2ilWGOROSRx_Y_rvfn47htq3xDBAAIB-jEbXyspSYYEJOrLIV4bAQADAgADeQADNgQ",
+              "caption": "1. Откройте меню настроек. Нажмите на иконку шестеренки (⚙️) в правом верхнем углу окна Cisco Jabber."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICh2ilWHjsxOtKX6C2qyBnL_Di178NAAIC-jEbXyspSckZdHDKd5WyAQADAgADeAADNgQ",
+              "caption": "2. Выйдите из приложения. В открывшемся меню выберите пункт «Выйти». После этого вы увидите окно подтверждения."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICiWilWHw_2KJuXf7VFsCnIhLW6tTAAAID-jEbXyspSdH_yuqXCnuKAQADAgADeAADNgQ",
+              "caption": "3. Выполните сброс. В окне подтверждения выхода нажмите кнопку «Сброс Jabber»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICi2ilWIFkID9AGVZa01rxQyLE1nd4AAIE-jEbXyspSTa3saAoJSsfAQADAgADeAADNgQ",
+              "caption": "4. Подтвердите действие. Система запросит подтверждение сброса."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICjWilWIVoOsm_b31U7IZXshFtVL0iAAIF-jEbXyspSbcIFl0oYG_RAQADAgADeAADNgQ",
+              "caption": "5. Подтверждаем. В появившемся окне введите ваш пароль для учетной записи Windows."
+            }
+          ]
+        },
+        "3.2": {
+          "title": "Настройка наушников",
+          "photos": [
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICj2ilWJVAnT4ptsSbbobZJ2Q1ZnJdAAIG-jEbXyspSeH8LvHiu4AnAQADAgADeQADNgQ",
+              "caption": "1. Заходим в Панель управления. Для этого в поисковике пишем «Панель управления»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICkWilWJtXNYSaZbm8ePdtAAHFoHOv5AACB_oxG18rKUl455pkOT01YgEAAwIAA3kAAzYE",
+              "caption": "2. Нажимаем на неё."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICk2ilWKEpRZGX36WzAiZ3n47WoSKJAAII-jEbXyspSUSO4VQYhIQUAQADAgADeQADNgQ",
+              "caption": "3. Меняем вид значков с «Категории» на «Крупные значки»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAIClWilWKWZWFGqatj9T3PTyjrh7SBPAAIJ-jEbXyspSVlMTyIPaLKcAQADAgADeQADNgQ",
+              "caption": "4. Нажимаем на «Звук»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICl2ilWKkr19z0JAvCxqFp_sCSXKGsAAIK-jEbXyspSWOJQGdeddyGAQADAgADeQADNgQ",
+              "caption": "5. Если есть картинка монитора, жмем правой кнопкой и нажимаем на «Отключить»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICmWilWK6xuPBvq60HZPLCvNPokwacAAIL-jEbXyspScerLyvcX-SNAQADAgADeQADNgQ",
+              "caption": "6. Далее переходим во вкладку «Запись»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICm2ilWLKvuwUmHl_MkxufHOUzXMmXAAIM-jEbXyspSfbPBDXui4J7AQADAgADeQADNgQ",
+              "caption": "7. Нажимаем на значок с галочкой два раза. Заходим в «Прослушать»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICnWilWLZLcFZpu9KKWVoYo9NWuntvAAIN-jEbXyspSfGY2eO2wQGCAQADAgADeQADNgQ",
+              "caption": "8. Нажимаем на «Прослушивать с этого устройства»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICn2ilWLk3Ul6fcH5PUwrbjhsGws0gAAIO-jEbXyspSehVBEHcXFV9AQADAgADeQADNgQ",
+              "caption": "9. И применяем."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICoWilWL4lubm7DQoLEXDyZpfwDcYjAAIP-jEbXyspSSFaNCKZSSKnAQADAgADeQADNgQ",
+              "caption": "10. Если всё хорошо слышно, отключаем обратно функцию «Прослушивать с данного устройства» и нажимаем «Применить»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICo2ilWMJR80CsRtSoERwIN69R4IHWAAIS-jEbXyspSXgyRbbkdc5CAQADAgADeQADNgQ",
+              "caption": "11. Если значок такой, как на картинке, значит, микрофон выключен. Для его включения просто нажмите на кнопку, чтобы он стал таким: 🔊. После этого микрофон должен заработать."
+            }
+          ]
+        }
+      }
+    },
+    "4": {
+      "title": "4. Настройка прокси Windows",
+      "version_hints": {
+        "title": "Как определить версию Windows?",
+        "hints": [
+          {
+            "version": "Windows 10",
+            "description": "Кнопка \"Пуск\" находится СЛЕВА ВНИЗУ и имеет вид логотипа Windows. При нажатии открывается меню с живыми плитками"
+          },
+          {
+            "version": "Windows 11",
+            "description": "Кнопка \"Пуск\" находится ПО ЦЕНТРУ ВНИЗУ экрана. Меню имеет округлые углы и современный дизайн без живых плиток"
+          }
+        ]
+      },
+      "subproblems": {
+        "4.1": {
+          "title": "Windows 10",
+          "photos": [
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICa2ilVYtgc9cfP6xFWOxD6GagglGLAALh-TEbXyspSdZ7VWY_I7K1AQADAgADeAADNgQ",
+              "caption": "Шаг 1. Откройте браузер Chrome/Edge и зайдите на MWiki (https://wiki.mbank.kg/). Введите логин и пароль, затем найдите блок «Что делать если не работают интерфейсы? Нужно прописать прокси сервер!»"
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICbWilVZA70QIb5Mgn-CIsWFnfv5uHAALi-TEbXyspSaxT3gogpknrAQADAgADeAADNgQ",
+              "caption": "Шаг 2. Свернуть браузер и нажать на кнопку «Пуск», далее «Параметры»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICb2ilVZU3Uau-VPIXUc1YYF0wXzNcAALj-TEbXyspSRdk2pgdz95EAQADAgADeAADNgQ",
+              "caption": "Шаг 3. Выбрать раздел «Сеть и интернет»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICcWilVZvfErb8mHwIy00vcHjoLG3wAALk-TEbXyspSVHWcTOeRYOuAQADAgADeAADNgQ",
+              "caption": "Шаг 4. Перейти в раздел «Прокси-сервер» и нажать на иконку «монитора»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICc2ilVZ79R2zjPPYHuqWdTDVEC4QLAALl-TEbXyspSZSa_36pWAosAQADAgADeAADNgQ",
+              "caption": "Шаг 5. Переключить ползунок «Использовать прокси-сервер» на «Вкл.» и прописать IP адрес: 172.23.182.133, порт: 3128."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICdWilVaCHuOCCIQtBaDbVawsfnXYYAALm-TEbXyspSQEnOSk_93BGAQADAgADeAADNgQ",
+              "caption": "Шаг 6. Далее вставляем скопированный текст с MWiki в поле, как указано на скриншоте, и обязательно нажимаем на кнопку «Сохранить»."
+            }
+          ]
+        },
+        "4.2": {
+          "title": "Windows 11",
+          "photos": [
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICd2ilVoORbH5QWbXSH41D2pD2E9rHAALp-TEbXyspSZoSMCzAbPPSAQADAgADeQADNgQ",
+              "caption": "Шаг 1. Откройте браузер Chrome/Edge и зайдите на MWiki (https://wiki.mbank.kg/). Введите логин и пароль, затем найдите блок «Что делать если не работают интерфейсы? Нужно прописать прокси сервер!»"
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICbWilVZA70QIb5Mgn-CIsWFnfv5uHAALi-TEbXyspSaxT3gogpknrAQADAgADeAADNgQ",
+              "caption": "Шаг 2. Свернуть браузер и нажать на кнопку «Пуск», далее «Параметры»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICe2ilVocgZez0cUfvFL7EPqwd_pnmAALq-TEbXyspSalUrcE2a4WBAQADAgADeAADNgQ",
+              "caption": "Шаг 3. Выбрать раздел «Сеть и интернет» и далее «Прокси-сервер»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICf2ilVqwgo0_sl7eU18HrrDNLypdKAALt-TEbXyspScx0Ol6YCJKSAQADAgADeQADNgQ",
+              "caption": "Шаг 4. В открывшемся разделе нажимаем кнопку «Изменить»."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICfWilVokoIedagw1YOGHoIb-TsRNGAALr-TEbXyspST-kMmwB3KoRAQADAgADeAADNgQ",
+              "caption": "Шаг 5. Переключить ползунок «Использовать прокси-сервер» на «Вкл.» и прописать IP адрес: 172.23.182.133, порт: 3128.\n* Для вставки текста используйте: Ctrl + V"
+            }
+          ]
+        }
+      }
+    },
+    "5": {
+      "title": "5. Монитор не включается",
+      "subproblems": {
+        "5.1": {
+          "title": "Выключается монитор",
+          "photos": [
+            {
+              "id": "AgACAgIAAxkBAAIGH2imolfmNOKF-iBOcEqBfn8q7XooAAK4-zEbfsM4SZ6bhplcf9moAQADAgADeAADNgQ",
+              "caption": "Примеры того, как выглядят провода, которые нужно проверить."
+            },
+            {
+              "id": "AgACAgIAAyEFAASacHO5AAICrmimomJM7rmQ-npz736Mj1J9QOFWAAKg-DEb-dYwSduNUxhWw0rKAQADAgADeAADNgQ",
+              "caption": "Примеры того, как выглядят провода, которые нужно проверить."
+            }
+          ]
+        }
+      }
+    },
+    "6": {
+      "title": "6. Проблемы с CISCO",
+      "photos": []
+    },
+    "7": {
+      "title": "7. Другая проблема",
+      "photos": []
+    }
+  }
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Выберите проблему</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #007b7e;
+            margin-bottom: 35px;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        a {
+            display: block;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        a:hover {
+            background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        a:active {
+            transform: translateY(-1px);
+        }
+.back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 16px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+.admin-link {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-size: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 600;
+    background: rgba(255, 165, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border: 2px solid rgba(255, 165, 0, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.admin-link:hover {
+    background: rgba(255, 165, 0, 0.5);
+    border-color: rgba(255, 165, 0, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+<a href="javascript:history.back()" class="back-link">
+    ⬅️ Назад
+</a>
+<a href="{{ url_for('admin_login') }}" class="admin-link">
+    🔧 Админ
+</a>
+<div class="container">
+    <h2>Здравствуйте, {{ session['user_info']['name'] }}!<br>
+        С какой проблемой вы столкнулись?</h2>
+    <ul>
+        {% for problem_id, problem in manuals.items() %}
+        <li><a href="{{ url_for('select_problem', problem_id=problem_id) }}">{{ problem.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Выберите проблему</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background: linear-gradient(135deg, #0bb17c, #007b7e);-->
+<!--            margin: 0;-->
+<!--            padding: 20px;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            min-height: 100vh;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            background: #fff;-->
+<!--            padding: 40px;-->
+<!--            border-radius: 20px;-->
+<!--            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);-->
+<!--            width: 100%;-->
+<!--            max-width: 800px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        h2 {-->
+<!--            color: #222;-->
+<!--            margin-bottom: 30px;-->
+<!--            font-size: 1.8em;-->
+<!--        }-->
+
+<!--        .grid {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));-->
+<!--            gap: 20px;-->
+<!--        }-->
+
+<!--        .card {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            padding: 25px;-->
+<!--            background: linear-gradient(135deg, #007bff, #0056b3);-->
+<!--            color: #fff;-->
+<!--            border-radius: 15px;-->
+<!--            font-size: 1.1em;-->
+<!--            font-weight: 600;-->
+<!--            text-decoration: none;-->
+<!--            transition: transform 0.2s ease, box-shadow 0.2s ease;-->
+<!--        }-->
+
+<!--        .card:hover {-->
+<!--            transform: translateY(-5px);-->
+<!--            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h2>Здравствуйте, {{ session['user_info']['name'] }}!<br>-->
+<!--        С какой проблемой вы столкнулись?</h2>-->
+<!--    <div class="grid">-->
+<!--        {% for problem_id, problem in manuals.items() %}-->
+<!--        <a href="{{ url_for('select_problem', problem_id=problem_id) }}" class="card">-->
+<!--            {{ problem.title }}-->
+<!--        </a>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

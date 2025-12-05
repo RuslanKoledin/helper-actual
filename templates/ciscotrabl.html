@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Опишите проблему</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #0bb17c, #007b7e);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+.back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 1.1em;
+    text-decoration: none;
+    color: #007bff; /* Цвет текста */
+    font-weight: normal;
+
+    /* === НОВЫЕ СТИЛИ ДЛЯ ВЫДЕЛЕНИЯ ГРАНИЦ === */
+    background-color: #ffffff; /* Белый фон для контраста */
+    padding: 8px 12px;         /* Внутренние отступы */
+    border: 1px solid #007bff; /* Синяя рамка (грань) */
+    border-radius: 5px;        /* Скругление углов */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень, чтобы приподнять */
+    /* ======================================= */
+
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.back-link:hover {
+    text-decoration: none; /* Убираем подчеркивание при наведении */
+    background-color: #007bff; /* Синий фон при наведении */
+    color: #ffffff; /* Белый текст при наведении */
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+<a href="javascript:history.back()" class="back-link">
+    ⬅️ Назад
+</a>
+    <div class="container">
+        <h2>Пожалуйста, опишите вашу проблему как можно подробнее.</h2>
+        <form action="{{ url_for('other_problem') }}" method="POST">
+         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+         <textarea name="problem" rows="10" required></textarea><br><br>
+      <button type="submit">Отправить заявку</button>
+    </form>
+    </div>
+</body>
+</html>
