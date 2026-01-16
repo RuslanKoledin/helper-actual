@@ -179,6 +179,14 @@ tm = TopicsManager("topics.db")
 # sm = StatsManager()
 sm = None
 
+# Константы результатов обращения (используются даже когда StatsManager отключен)
+RESULT_VIDEO_HELPED = "video_helped"
+RESULT_VIDEO_NOT_HELPED = "video_not_helped"
+RESULT_SOLVED_BY_HELPER = "solved_by_helper"
+RESULT_TICKET_CREATED = "ticket_created"
+RESULT_TICKET_DONE = "ticket_done"
+RESULT_TICKET_NOT_RELEVANT = "ticket_not_relevant"
+
 # Импорт тематик при первом запуске (если база пустая)
 stats = tm.get_statistics()
 if stats['total_topics'] == 0:
@@ -311,7 +319,7 @@ def send_ticket(problem, screenshots=None, topic_info=None):
 
         if sm:
             sm.log_request(
-                result_type=sm.RESULT_TICKET_CREATED,
+                result_type=RESULT_TICKET_CREATED,
                 problem_description=problem,
                 department=department,
                 name=name,
@@ -416,7 +424,7 @@ def send_solved_ticket(problem):
             # Логируем в PostgreSQL для статистики
             if sm:
                 sm.log_request(
-                    result_type=sm.RESULT_SOLVED_BY_HELPER,
+                    result_type=RESULT_SOLVED_BY_HELPER,
                     problem_description=problem,
                     department=department,
                     name=name,
@@ -445,7 +453,7 @@ def send_video_feedback(problem, helped):
                 f"Проблема: {problem}"
             )
             thread_id = SOLVED_TICKETS_THREAD_ID
-            result_type = sm.RESULT_VIDEO_HELPED
+            result_type = RESULT_VIDEO_HELPED
         else:
             support_message = (
                 f"📹 **ВИДЕО-МАНУАЛ НЕ ПОМОГ** ❌\n"
@@ -456,7 +464,7 @@ def send_video_feedback(problem, helped):
                 f"Пользователь перешел к пошаговой инструкции"
             )
             thread_id = SOLVED_TICKETS_THREAD_ID
-            result_type = sm.RESULT_VIDEO_NOT_HELPED
+            result_type = RESULT_VIDEO_NOT_HELPED
 
         try:
             bot.send_message(
