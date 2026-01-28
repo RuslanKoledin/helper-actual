@@ -2,8 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выберите проблему</title>
     <style>
+        :root {
+            --bg: #0c0c0c;
+            --card: #1a1a1a;
+            --card2: #202020;
+            --text: #e8e8e8;
+            --muted: #a8a8a8;
+            --border: #2a2a2a;
+            --green: #00a651;
+            --greenHover: #009448;
+            --greenLight: #00d4aa;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -11,33 +24,31 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
-            background-attachment: fixed;
-            margin: 0;
-            padding: 20px;
+            font-family: "Segoe UI", system-ui, -apple-system, Arial;
+            background: var(--bg);
+            min-height: 100vh;
+            padding: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            color: #333;
+            color: var(--text);
         }
 
         .container {
-            background-color: #ffffff;
+            background: linear-gradient(180deg, var(--card), var(--card2));
+            border: 1px solid var(--border);
             padding: 45px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 14px;
             width: 100%;
             max-width: 650px;
             text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -45,11 +56,24 @@
             }
         }
 
+        .logo-text {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 800;
+            font-size: 32px;
+            letter-spacing: -0.3px;
+            background: linear-gradient(90deg, var(--greenLight) 0%, var(--green) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
         h2 {
-            color: #007b7e;
+            color: var(--text);
             margin-bottom: 35px;
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
             line-height: 1.4;
         }
 
@@ -59,35 +83,56 @@
         }
 
         li {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         a {
             display: block;
-            padding: 18px 20px;
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-            color: white;
+            padding: 18px 24px;
+            background: var(--green);
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            font-size: 17px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            font-size: 16px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+            border: 1px solid var(--green);
         }
 
         a:hover {
-            background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+            background: var(--greenHover);
+            border-color: var(--greenHover);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 166, 81, 0.3);
         }
 
         a:active {
             transform: translateY(-1px);
         }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 32px 24px;
+            }
+
+            .logo-text {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+
+            a {
+                padding: 16px 20px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    <div class="logo-text">МБанк</div>
     <h2>Здравствуйте, {{ session['user_info']['name'] }}!<br>
         С какой проблемой вы столкнулись?</h2>
     <ul>
@@ -98,77 +143,3 @@
 </div>
 </body>
 </html>
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Выберите проблему</title>-->
-<!--    <style>-->
-<!--        body {-->
-<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
-<!--            background: linear-gradient(135deg, #0bb17c, #007b7e);-->
-<!--            margin: 0;-->
-<!--            padding: 20px;-->
-<!--            display: flex;-->
-<!--            justify-content: center;-->
-<!--            align-items: center;-->
-<!--            min-height: 100vh;-->
-<!--            color: #333;-->
-<!--        }-->
-
-<!--        .container {-->
-<!--            background: #fff;-->
-<!--            padding: 40px;-->
-<!--            border-radius: 20px;-->
-<!--            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);-->
-<!--            width: 100%;-->
-<!--            max-width: 800px;-->
-<!--            text-align: center;-->
-<!--        }-->
-
-<!--        h2 {-->
-<!--            color: #222;-->
-<!--            margin-bottom: 30px;-->
-<!--            font-size: 1.8em;-->
-<!--        }-->
-
-<!--        .grid {-->
-<!--            display: grid;-->
-<!--            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));-->
-<!--            gap: 20px;-->
-<!--        }-->
-
-<!--        .card {-->
-<!--            display: flex;-->
-<!--            align-items: center;-->
-<!--            justify-content: center;-->
-<!--            padding: 25px;-->
-<!--            background: linear-gradient(135deg, #007bff, #0056b3);-->
-<!--            color: #fff;-->
-<!--            border-radius: 15px;-->
-<!--            font-size: 1.1em;-->
-<!--            font-weight: 600;-->
-<!--            text-decoration: none;-->
-<!--            transition: transform 0.2s ease, box-shadow 0.2s ease;-->
-<!--        }-->
-
-<!--        .card:hover {-->
-<!--            transform: translateY(-5px);-->
-<!--            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container">-->
-<!--    <h2>Здравствуйте, {{ session['user_info']['name'] }}!<br>-->
-<!--        С какой проблемой вы столкнулись?</h2>-->
-<!--    <div class="grid">-->
-<!--        {% for problem_id, problem in manuals.items() %}-->
-<!--        <a href="{{ url_for('select_problem', problem_id=problem_id) }}" class="card">-->
-<!--            {{ problem.title }}-->
-<!--        </a>-->
-<!--        {% endfor %}-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->

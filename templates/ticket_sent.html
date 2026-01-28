@@ -2,8 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Заявка отправлена</title>
     <style>
+        :root {
+            --bg: #0c0c0c;
+            --card: #1a1a1a;
+            --card2: #202020;
+            --text: #e8e8e8;
+            --muted: #a8a8a8;
+            --border: #2a2a2a;
+            --green: #00a651;
+            --greenHover: #009448;
+            --greenLight: #00d4aa;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -11,35 +24,33 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
-            background-attachment: fixed;
-            margin: 0;
-            padding: 20px;
+            font-family: "Segoe UI", system-ui, -apple-system, Arial;
+            background: var(--bg);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #333;
-            text-align: center;
+            padding: 24px;
+            color: var(--text);
         }
 
         .container {
-            background-color: #ffffff;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(180deg, var(--card), var(--card2));
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 50px 40px;
             width: 100%;
             max-width: 550px;
-            margin-bottom: 25px;
-            animation: fadeIn 0.5s ease-in-out;
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-15px);
             }
             to {
                 opacity: 1;
@@ -47,57 +58,94 @@
             }
         }
 
-        h2 {
-            color: #007b7e;
-            font-size: 32px;
-            margin-bottom: 15px;
-            font-weight: 600;
+        .icon {
+            font-size: 72px;
+            margin-bottom: 24px;
+            animation: bounce 0.6s ease;
         }
 
-        .icon {
-            font-size: 64px;
-            margin-bottom: 20px;
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h2 {
+            color: var(--text);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
         p {
-            font-size: 18px;
-            color: #555;
+            color: var(--muted);
+            font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 32px;
         }
 
         .home-button {
             display: inline-block;
-            padding: 15px 35px;
-            font-size: 17px;
-            font-weight: 600;
-            color: #fff;
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            padding: 14px 36px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #041a0f;
+            background: var(--green);
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            transition: all 0.2s ease;
         }
 
         .home-button:hover {
-            background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+            background: var(--greenHover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            text-decoration: none;
         }
 
         .home-button:active {
             transform: translateY(0);
         }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 28px;
+            }
+
+            .icon {
+                font-size: 64px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">🚀</div>
-        <h2>Отправлено!</h2>
-        <p>Ваша заявка была успешно отправлена специалистам. Ожидайте, они скоро с вами свяжутся.</p>
+        <div class="icon">✅</div>
+        <h2>Заявка отправлена!</h2>
+        <p>Ваша заявка была успешно отправлена специалистам технической поддержки. Ожидайте, они скоро с вами свяжутся.</p>
+        <a href="{{ url_for('go_home') }}" class="home-button">На главную</a>
     </div>
-    <a href="{{ url_for('go_home') }}" class="home-button">На Главную</a>
+
+    <script>
+        // Блокируем возврат назад
+        history.pushState(null, null, location.href);
+
+        window.addEventListener('popstate', function() {
+            // При попытке вернуться назад - снова добавляем текущую страницу в историю
+            history.pushState(null, null, location.href);
+        });
+    </script>
 </body>
 </html>

@@ -2,8 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск тематики обращения</title>
     <style>
+        :root {
+            --bg: #0c0c0c;
+            --card: #1a1a1a;
+            --card2: #202020;
+            --text: #e8e8e8;
+            --muted: #a8a8a8;
+            --border: #2a2a2a;
+            --green: #00a651;
+            --greenHover: #009448;
+            --greenLight: #00d4aa;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -11,13 +24,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
-            background-attachment: fixed;
-            margin: 0;
-            padding: 20px;
+            font-family: "Segoe UI", system-ui, -apple-system, Arial;
+            background: var(--bg);
             min-height: 100vh;
-            color: #333;
+            padding: 20px;
+            color: var(--text);
         }
 
         .main-wrapper {
@@ -26,45 +37,13 @@
             max-width: 1400px;
             margin: 0 auto;
             align-items: flex-start;
-        }
-
-        .sidebar {
-            background-color: #ffffff;
-            padding: 30px 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 20px;
-            animation: slideInLeft 0.5s ease-in-out;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 45px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            flex: 1;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -72,17 +51,50 @@
             }
         }
 
+        .sidebar {
+            background: linear-gradient(180deg, var(--card), var(--card2));
+            border: 1px solid var(--border);
+            padding: 24px 20px;
+            border-radius: 14px;
+            width: 280px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 20px;
+        }
+
+        .container {
+            background: linear-gradient(180deg, var(--card), var(--card2));
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 14px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .logo-text {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 800;
+            font-size: 28px;
+            letter-spacing: -0.3px;
+            background: linear-gradient(90deg, var(--greenLight) 0%, var(--green) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+        }
+
         h2 {
-            color: #007b7e;
-            margin-bottom: 15px;
-            font-size: 26px;
-            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+            font-size: 24px;
+            font-weight: 700;
         }
 
         .subtitle {
-            color: #666;
+            color: var(--muted);
             margin-bottom: 30px;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.5;
         }
 
@@ -93,33 +105,39 @@
 
         .search-label {
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 600;
-            color: #007b7e;
-            font-size: 16px;
+            color: var(--greenLight);
+            font-size: 14px;
         }
 
         .search-input {
             width: 100%;
-            padding: 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            padding: 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
             box-sizing: border-box;
-            font-size: 16px;
+            font-size: 15px;
             font-family: inherit;
+            color: var(--text);
             transition: all 0.3s ease;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: #007b7e;
-            box-shadow: 0 0 0 3px rgba(0, 123, 126, 0.1);
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--muted);
         }
 
         .search-hint {
-            margin-top: 10px;
-            font-size: 13px;
-            color: #666;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--muted);
             font-style: italic;
         }
 
@@ -129,32 +147,40 @@
             overflow-y: auto;
         }
 
+        .topic-results::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .topic-results::-webkit-scrollbar-track {
+            background: var(--bg);
+            border-radius: 4px;
+        }
+
+        .topic-results::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .topic-results::-webkit-scrollbar-thumb:hover {
+            background: var(--green);
+        }
+
         .topic-item {
-            padding: 22px 25px;
+            padding: 20px 22px;
             margin-bottom: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
             cursor: default;
             transition: all 0.2s ease;
-            background: #f9f9f9;
+            background: linear-gradient(180deg, var(--card), var(--card2));
             text-align: left;
             width: 100%;
         }
 
-        /* Убран hover-эффект для просмотра
         .topic-item:hover {
-            border-color: #007b7e;
-            background: #f0f8ff;
-            transform: translateX(8px);
-            box-shadow: 0 4px 15px rgba(0, 123, 126, 0.15);
+            border-color: rgba(0, 166, 81, 0.5);
+            transform: translateX(4px);
         }
-
-        .topic-item.selected {
-            border-color: #007bff;
-            background: #e3f2fd;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.25);
-        }
-        */
 
         .topic-header {
             display: flex;
@@ -165,8 +191,8 @@
 
         .topic-name {
             font-weight: 600;
-            color: #333;
-            font-size: 15px;
+            color: var(--text);
+            font-size: 14px;
             line-height: 1.6;
             word-break: break-word;
             flex: 1;
@@ -174,38 +200,36 @@
 
         .topic-similarity {
             display: inline-block;
-            padding: 6px 14px;
-            background: #007b7e;
-            color: white;
+            padding: 6px 12px;
+            background: var(--green);
+            color: #ffffff;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             white-space: nowrap;
-            margin-left: 15px;
             flex-shrink: 0;
         }
 
-
         .loading {
             text-align: center;
-            color: #007b7e;
+            color: var(--greenLight);
             font-style: italic;
             margin: 30px 0;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .no-results {
             text-align: center;
-            color: #999;
+            color: var(--muted);
             font-style: italic;
             margin: 30px 0;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .empty-state {
             text-align: center;
             padding: 50px 20px;
-            color: #999;
+            color: var(--muted);
         }
 
         .empty-state-icon {
@@ -213,94 +237,60 @@
             margin-bottom: 15px;
         }
 
-        .submit-button {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 17px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .submit-button:hover:not(:disabled) {
-            background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-        }
-
-        .submit-button:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .submit-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
         .back-link {
             position: fixed;
             top: 20px;
             left: 20px;
             z-index: 1000;
-            font-size: 16px;
+            font-size: 13px;
             text-decoration: none;
-            color: #ffffff;
+            color: var(--text);
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 166, 81, 0.15);
+            border: 1px solid rgba(0, 166, 81, 0.3);
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
         }
 
         .back-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(0, 166, 81, 0.25);
+            border-color: rgba(0, 166, 81, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             text-decoration: none;
         }
 
         .channel-buttons {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: 1fr;
+            gap: 10px;
             margin-bottom: 12px;
         }
 
         .channel-btn {
-            padding: 14px 20px;
-            border: 2px solid #e0e0e0;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
             border-radius: 10px;
-            background: #f9f9f9;
-            color: #333;
-            font-size: 15px;
+            background: linear-gradient(180deg, var(--card), var(--card2));
+            color: var(--text);
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-family: inherit;
         }
 
         .channel-btn:hover {
-            border-color: #007b7e;
-            background: #f0f8ff;
+            border-color: rgba(0, 166, 81, 0.5);
+            background: linear-gradient(180deg, #1f1f1f, #252525);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 123, 126, 0.15);
         }
 
         .channel-btn.active {
-            border-color: #007bff;
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            border-color: var(--green);
+            background: var(--green);
+            color: #ffffff;
         }
 
         .channel-btn:active {
@@ -308,35 +298,47 @@
         }
 
         .topic-channel-badge {
-            padding: 6px 12px;
+            padding: 4px 10px;
             font-size: 11px;
-            color: #0056b3;
+            color: var(--greenLight);
             font-weight: 600;
-            background: rgba(0, 91, 179, 0.1);
+            background: rgba(0, 212, 170, 0.15);
             border-radius: 20px;
             display: inline-block;
             white-space: nowrap;
+            margin-top: 6px;
         }
 
         .sidebar h3 {
-            color: #007b7e;
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 16px;
+            font-size: 18px;
+            font-weight: 700;
             text-align: center;
-        }
-
-        .sidebar .channel-buttons {
-            grid-template-columns: 1fr;
         }
 
         .sidebar-label {
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 600;
-            color: #007b7e;
-            font-size: 14px;
+            color: var(--greenLight);
+            font-size: 13px;
             text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .container {
+                padding: 24px 20px;
+            }
         }
     </style>
 </head>
@@ -359,6 +361,7 @@
         </div>
 
         <div class="container">
+            <div class="logo-text">МБанк</div>
             <h2>📋 Просмотр тематик обращений</h2>
             <p class="subtitle">
                 Поиск и просмотр тематик. Введите описание для поиска или выберите канал для просмотра всех тематик
@@ -431,7 +434,7 @@
                 if (data.success && data.results.length > 0) {
                     displayTopics(data.results);
                 } else {
-                    topicResults.innerHTML = '<div class="no-results"><p>❌ Тематики не найдены</p><p style="margin-top: 10px; font-size: 14px;">Попробуйте изменить описание или использовать другие ключевые слова</p></div>';
+                    topicResults.innerHTML = '<div class="no-results"><p>❌ Тематики не найдены</p><p style="margin-top: 10px; font-size: 13px;">Попробуйте изменить описание или использовать другие ключевые слова</p></div>';
                 }
             } catch (error) {
                 topicResults.innerHTML = '<div class="no-results">❌ Ошибка поиска тематик. Попробуйте еще раз.</div>';
@@ -468,17 +471,6 @@
                 '</div>';
 
                 topicDiv.innerHTML = contentHTML;
-
-                // Удалена возможность выбора тематики - только просмотр
-                // topicDiv.addEventListener('click', function() {
-                //     document.querySelectorAll('.topic-item').forEach(function(item) {
-                //         item.classList.remove('selected');
-                //     });
-                //     this.classList.add('selected');
-                //     selectedTopicIdInput.value = this.getAttribute('data-topic-id');
-                //     selectedTopicNameInput.value = this.getAttribute('data-topic-name');
-                //     selectedTopicSimilarityInput.value = this.getAttribute('data-similarity');
-                // });
 
                 topicResults.appendChild(topicDiv);
             });
@@ -586,8 +578,6 @@
                 topicResults.innerHTML = '<div class="no-results">❌ Ошибка загрузки тематик</div>';
             }
         }
-
-        // Форма удалена - только просмотр тематик
     </script>
 </body>
 </html>

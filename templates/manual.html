@@ -279,6 +279,7 @@
         function showProcessing() {
             // Показываем индикатор обработки
             const overlay = document.createElement('div');
+            overlay.id = 'processing-overlay';
             overlay.style.cssText = `
                 position: fixed;
                 top: 0;
@@ -301,11 +302,24 @@
             document.body.appendChild(overlay);
         }
 
+        // Блокировка возврата назад после нажатия кнопок
+        function blockBackNavigation() {
+            // Добавляем состояние в историю
+            history.pushState(null, null, location.href);
+
+            // Перехватываем попытку вернуться назад
+            window.addEventListener('popstate', function(event) {
+                // Возвращаем вперед, блокируя возврат
+                history.pushState(null, null, location.href);
+            });
+        }
+
         function handleSolved() {
             if (isProcessing) return;
             isProcessing = true;
             disableAllButtons();
             showProcessing();
+            blockBackNavigation();
             location.href = '{{ url_for('finish_solved') }}';
         }
 
@@ -314,6 +328,7 @@
             isProcessing = true;
             disableAllButtons();
             showProcessing();
+            blockBackNavigation();
             location.href = '{{ url_for('send_final_ticket') }}';
         }
 
@@ -323,6 +338,7 @@
             isProcessing = true;
             disableAllButtons();
             showProcessing();
+            blockBackNavigation();
             location.href = '/video_feedback/' + result;
         }
     </script>
