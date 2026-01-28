@@ -2,8 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ manual_title }}</title>
     <style>
+        :root {
+            --bg: #0c0c0c;
+            --card: #1a1a1a;
+            --card2: #202020;
+            --text: #e8e8e8;
+            --muted: #a8a8a8;
+            --border: #2a2a2a;
+            --green: #00a651;
+            --greenHover: #009448;
+            --greenLight: #00d4aa;
+            --red: #e74c3c;
+            --redHover: #c0392b;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -11,29 +26,28 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0bb17c 0%, #007b7e 50%, #006064 100%);
-            background-attachment: fixed;
-            color: #333;
+            font-family: "Segoe UI", system-ui, -apple-system, Arial;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            margin: 0;
+            min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 0 auto;
-            background-color: #ffffff;
+            background: linear-gradient(180deg, var(--card), var(--card2));
+            border: 1px solid var(--border);
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            animation: fadeIn 0.5s ease-in-out;
+            border-radius: 14px;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
@@ -42,113 +56,169 @@
         }
 
         h1 {
-            color: #007b7e;
+            color: var(--text);
             text-align: center;
             margin-bottom: 35px;
-            font-size: 28px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
         }
 
         .instruction-step {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 35px;
-            border: 2px solid #e3f2fd;
-            border-radius: 16px;
-            padding: 25px;
-            background-color: #f0f8ff;
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.2s ease;
         }
 
         .instruction-step:hover {
-            border-color: #007bff;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+            border-color: rgba(0, 166, 81, 0.3);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .instruction-step p {
-            color: #333;
+            color: var(--text);
             font-weight: 500;
-            font-size: 17px;
+            font-size: 16px;
             text-align: center;
-            margin: 0 0 20px 0;
+            margin: 0 0 18px 0;
             padding: 0 10px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .instruction-step img {
             max-width: 100%;
             height: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
-        .instruction-step iframe {
+        .instruction-step iframe,
+        .instruction-step video {
             max-width: 100%;
             width: 100%;
             height: 400px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: none;
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
         .video-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: linear-gradient(135deg, var(--red) 0%, var(--redHover) 100%);
             color: white;
-            padding: 5px 15px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        .video-feedback-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 28px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .video-feedback-container p:first-of-type {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .video-feedback-container > div {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .video-feedback-container button {
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .video-feedback-container button:first-child {
+            background: var(--green);
+            color: #041a0f;
+        }
+
+        .video-feedback-container button:first-child:hover {
+            background: var(--greenHover);
+            transform: translateY(-2px);
+        }
+
+        .video-feedback-container button:last-child {
+            background: var(--red);
+            color: white;
+        }
+
+        .video-feedback-container button:last-child:hover {
+            background: var(--redHover);
+            transform: translateY(-2px);
+        }
+
+        .video-feedback-container p:last-of-type {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 14px;
         }
 
         .buttons-container {
             text-align: center;
             margin-top: 50px;
             padding-top: 30px;
-            border-top: 2px solid #e3f2fd;
+            border-top: 1px solid var(--border);
         }
 
-        .buttons-container p {
-            font-size: 19px;
+        .buttons-container > p {
+            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 25px;
-            color: #333;
+            margin-bottom: 24px;
+            color: var(--text);
         }
 
         .buttons-container button {
-            padding: 15px 30px;
-            font-size: 17px;
+            padding: 14px 32px;
+            font-size: 16px;
             font-weight: 600;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 8px;
+            transition: all 0.2s ease;
         }
 
         .solved-button {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            color: white;
+            background: var(--green);
+            color: #041a0f;
         }
 
         .solved-button:hover {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            background: var(--greenHover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
         }
 
         .ticket-button {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: var(--red);
             color: white;
         }
 
         .ticket-button:hover {
-            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+            background: var(--redHover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
         }
 
         .buttons-container button:active {
@@ -157,33 +227,41 @@
 
         .no-manual-message {
             text-align: center;
-            font-size: 1.2em;
-            color: #888;
+            font-size: 16px;
+            color: var(--muted);
             margin-top: 50px;
+        }
+
+        .missing-photo {
+            color: #ffc107;
+            margin: 10px 0;
+            padding: 16px;
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            text-align: center;
         }
 
         .back-link {
             position: fixed;
             left: 20px;
             z-index: 1000;
-            font-size: 16px;
+            font-size: 14px;
             text-decoration: none;
-            color: #ffffff;
+            color: var(--text);
             font-weight: 600;
-            background: rgba(0, 123, 126, 0.85);
+            background: rgba(0, 166, 81, 0.15);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            padding: 10px 18px;
+            border: 1px solid rgba(0, 166, 81, 0.3);
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
 
         .back-link:hover {
-            background: rgba(0, 123, 126, 0.95);
-            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 166, 81, 0.25);
+            border-color: rgba(0, 166, 81, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
             text-decoration: none;
         }
 
@@ -193,7 +271,40 @@
 
         .second-link {
             top: 20px;
-            left: 150px;
+            left: 140px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .container {
+                padding: 28px 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            .instruction-step {
+                padding: 20px 16px;
+            }
+
+            .buttons-container button {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            .back-link {
+                font-size: 12px;
+                padding: 8px 14px;
+            }
+
+            .second-link {
+                left: 120px;
+            }
         }
     </style>
 </head>
@@ -202,35 +313,33 @@
     ⬅️ Назад
 </a>
 <a href="{{ url_for('index') }}" class="back-link second-link">
-        👤 Страница Входа
-    </a>
+    🏠 Главная
+</a>
     <div class="container">
         <h1>{{ manual_title | e }}</h1>
 
         {% if video_data %}
-            <div class="instruction-step" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);">
+            <div class="instruction-step">
                 <span class="video-badge">📹 ВИДЕО-ИНСТРУКЦИЯ</span>
                 <p><strong>{{ video_data.caption }}</strong></p>
-                <video controls style="max-width: 100%; border-radius: 12px;">
+                <video controls>
                     <source src="{{ video_data.url }}" type="video/mp4">
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
 
             <!-- Опрос после видео -->
-            <div class="video-feedback-container" style="text-align: center; margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 16px; border: 2px solid #dee2e6;">
-                <p style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #333;">Видео-инструкция помогла решить проблему?</p>
-                <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                    <button onclick="handleVideoFeedback('helped')"
-                            style="padding: 12px 30px; font-size: 16px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);">
+            <div class="video-feedback-container">
+                <p>Видео-инструкция помогла решить проблему?</p>
+                <div>
+                    <button onclick="handleVideoFeedback('helped')">
                         Да, помогло ✅
                     </button>
-                    <button onclick="handleVideoFeedback('not_helped')"
-                            style="padding: 12px 30px; font-size: 16px; font-weight: 600; border: none; border-radius: 10px; cursor: pointer; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);">
+                    <button onclick="handleVideoFeedback('not_helped')">
                         Нет, не помогло ❌
                     </button>
                 </div>
-                <p style="color: #888; font-size: 14px; margin-top: 15px;">Если видео не помогло, вам будет показана пошаговая инструкция</p>
+                <p>Если видео не помогло, вам будет показана пошаговая инструкция</p>
             </div>
         {% endif %}
 
@@ -243,8 +352,8 @@
                         {% if photo.url %}
                             <img src="{{ photo.url }}" alt="Инструкция">
                         {% else %}
-                            <div style="color: #856404; margin: 10px 0; padding: 15px; background: #fff3cd; border-radius: 6px; text-align: center;">
-                                📷 Пока фото для данного шага нет
+                            <div class="missing-photo">
+                                📷 Фото для данного шага пока отсутствует
                             </div>
                         {% endif %}
                     </div>
@@ -268,7 +377,6 @@
         let isProcessing = false;
 
         function disableAllButtons() {
-            // Отключаем все кнопки на странице
             document.querySelectorAll('button').forEach(btn => {
                 btn.disabled = true;
                 btn.style.opacity = '0.6';
@@ -277,7 +385,6 @@
         }
 
         function showProcessing() {
-            // Показываем индикатор обработки
             const overlay = document.createElement('div');
             overlay.id = 'processing-overlay';
             overlay.style.cssText = `
@@ -286,17 +393,17 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.7);
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 z-index: 9999;
             `;
             overlay.innerHTML = `
-                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-                    <div style="font-size: 48px; margin-bottom: 15px;">⏳</div>
-                    <div style="font-size: 18px; font-weight: 600; color: #333;">Обработка...</div>
-                    <div style="font-size: 14px; color: #888; margin-top: 8px;">Пожалуйста, подождите</div>
+                <div style="background: linear-gradient(180deg, #1a1a1a, #202020); padding: 35px; border-radius: 14px; text-align: center; border: 1px solid #2a2a2a;">
+                    <div style="font-size: 52px; margin-bottom: 16px;">⏳</div>
+                    <div style="font-size: 18px; font-weight: 600; color: #e8e8e8;">Обработка...</div>
+                    <div style="font-size: 14px; color: #a8a8a8; margin-top: 8px;">Пожалуйста, подождите</div>
                 </div>
             `;
             document.body.appendChild(overlay);
@@ -304,12 +411,8 @@
 
         // Блокировка возврата назад после нажатия кнопок
         function blockBackNavigation() {
-            // Добавляем состояние в историю
             history.pushState(null, null, location.href);
-
-            // Перехватываем попытку вернуться назад
             window.addEventListener('popstate', function(event) {
-                // Возвращаем вперед, блокируя возврат
                 history.pushState(null, null, location.href);
             });
         }
@@ -344,4 +447,3 @@
     </script>
 </body>
 </html>
-
